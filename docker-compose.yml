@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+    volumes:
+      - uploads:/uploads
+    command: [ "node", "backend.js" ]
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+    command: [ "npm", "start" ]
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  uploads:
+    name: "uploads_ml"
