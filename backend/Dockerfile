@@ -5,4 +5,3 @@ COPY package* .
 RUN npm ci
 
 COPY . .
-

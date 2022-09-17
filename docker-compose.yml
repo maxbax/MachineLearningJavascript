@@ -5,9 +5,6 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-      args:
-        http_proxy: ${http_proxy}
-        https_proxy: ${https_proxy}
     volumes:
       - uploads:/uploads
     command: [ "node", "backend.js" ]
@@ -18,9 +15,6 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-      args:
-        http_proxy: ${http_proxy}
-        https_proxy: ${https_proxy}
     command: [ "npm", "start" ]
     ports:
       - "3000:3000"
